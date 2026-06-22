@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             min-height: 100vh;
@@ -79,9 +75,7 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .admin-panel.active {
-            display: block;
-        }
+        .admin-panel.active { display: block; }
 
         .login-screen {
             display: flex;
@@ -102,17 +96,8 @@
             width: 90%;
         }
 
-        .login-box h2 {
-            color: #e94560;
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-        }
-
-        .login-box p {
-            color: #aaa;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
+        .login-box h2 { color: #e94560; margin-bottom: 10px; font-size: 1.8rem; }
+        .login-box p { color: #aaa; margin-bottom: 30px; font-size: 0.9rem; }
 
         .login-box input {
             width: 100%;
@@ -128,9 +113,7 @@
             transition: border-color 0.3s;
         }
 
-        .login-box input:focus {
-            border-color: #e94560;
-        }
+        .login-box input:focus { border-color: #e94560; }
 
         .login-box button {
             width: 100%;
@@ -145,17 +128,9 @@
             transition: all 0.3s;
         }
 
-        .login-box button:hover {
-            background: #ff6b81;
-            transform: translateY(-2px);
-        }
+        .login-box button:hover { background: #ff6b81; transform: translateY(-2px); }
 
-        .login-error {
-            color: #e74c3c;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            display: none;
-        }
+        .login-error { color: #e74c3c; margin-top: 15px; font-size: 0.9rem; display: none; }
 
         .admin-header {
             display: flex;
@@ -166,10 +141,7 @@
             border-bottom: 2px solid #e74c3c;
         }
 
-        .admin-header h2 {
-            color: #e74c3c;
-            font-size: 1.8rem;
-        }
+        .admin-header h2 { color: #e74c3c; font-size: 1.8rem; }
 
         .admin-close {
             background: #e74c3c;
@@ -197,16 +169,8 @@
             border: 1px solid #0f3460;
         }
 
-        .stat-card h3 {
-            color: #e94560;
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        .stat-card p {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
+        .stat-card h3 { color: #e94560; font-size: 2rem; margin-bottom: 5px; }
+        .stat-card p { color: #aaa; font-size: 0.9rem; }
 
         .visits-table {
             width: 100%;
@@ -216,8 +180,7 @@
             overflow: hidden;
         }
 
-        .visits-table th,
-        .visits-table td {
+        .visits-table th, .visits-table td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #0f3460;
@@ -232,14 +195,8 @@
             letter-spacing: 1px;
         }
 
-        .visits-table tr:hover {
-            background: #1a1a3e;
-        }
-
-        .visits-table td {
-            font-size: 0.9rem;
-            color: #ddd;
-        }
+        .visits-table tr:hover { background: #1a1a3e; }
+        .visits-table td { font-size: 0.9rem; color: #ddd; }
 
         .ip-badge {
             background: #e94560;
@@ -258,10 +215,7 @@
             font-size: 0.8rem;
         }
 
-        .time-badge {
-            color: #aaa;
-            font-size: 0.8rem;
-        }
+        .time-badge { color: #aaa; font-size: 0.8rem; }
 
         .clear-btn {
             background: #c0392b;
@@ -274,9 +228,7 @@
             margin-bottom: 20px;
         }
 
-        .clear-btn:hover {
-            background: #e74c3c;
-        }
+        .clear-btn:hover { background: #e74c3c; }
 
         .export-btn {
             background: #27ae60;
@@ -290,6 +242,9 @@
             margin-left: 10px;
         }
 
+        .loading { color: #e94560; text-align: center; padding: 20px; }
+        .error-msg { color: #e74c3c; text-align: center; padding: 20px; }
+
         @media (max-width: 768px) {
             .main-text { font-size: 2.5rem; }
             .visits-table { font-size: 0.75rem; }
@@ -301,10 +256,8 @@
 <base target="_blank">
 </head>
 <body>
-    <!-- Background Hearts -->
     <div class="hearts-bg" id="heartsBg"></div>
 
-    <!-- Main Text -->
     <div class="main-text" id="mainText">
         unfortunately I still love u
     </div>
@@ -312,7 +265,6 @@
     <!-- ===== ADMIN PANEL ===== -->
     <div class="admin-panel" id="adminPanel">
 
-        <!-- Login Screen -->
         <div class="login-screen" id="loginScreen">
             <div class="login-box">
                 <h2>🔒 Admin Access</h2>
@@ -323,7 +275,6 @@
             </div>
         </div>
 
-        <!-- Dashboard -->
         <div id="dashboardContent" style="display:none;">
             <div class="admin-header">
                 <h2>🔒 Visitor Logs Dashboard</h2>
@@ -354,29 +305,23 @@
                 <button class="export-btn" onclick="exportLogs()">📥 Export CSV</button>
             </div>
 
-            <table class="visits-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>IP Address</th>
-                        <th>Location</th>
-                        <th>City</th>
-                        <th>ISP</th>
-                        <th>Device</th>
-                        <th>Browser</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody id="visitsTableBody">
-                </tbody>
-            </table>
+            <div id="tableContainer">
+                <div class="loading">Loading visitor data...</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // ===== CONFIG =====
+        // ===== CONFIG - EDIT THESE =====
+        // 1. Go to https://jsonbin.io
+        // 2. Sign up (Google/GitHub - 30 seconds)
+        // 3. Create a bin with: {"visits": []}
+        // 4. Paste your Bin ID and API Key below
+        const JSONBIN_BIN_ID = 'YOUR_BIN_ID_HERE';        // <-- PASTE BIN ID
+        const JSONBIN_API_KEY = '$2a$10$KhuwK71ieev.1YAgSK3/ae2BkMh3ksFYfXNHRdm9Aa9YOpZnP4G7W';      // <-- PASTE API KEY
+
+        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
         const ADMIN_PASSWORD = 'nona2025';
-        const STORAGE_KEY = 'visitor_logs_nona';
 
         // ===== BACKGROUND HEARTS =====
         function createBackgroundHearts() {
@@ -396,15 +341,13 @@
         }
         createBackgroundHearts();
 
-        // ===== VISITOR TRACKING =====
+        // ===== GET VISITOR DATA =====
         async function getIP() {
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
                 return data.ip;
-            } catch {
-                return 'Unknown';
-            }
+            } catch { return 'Unknown'; }
         }
 
         async function getLocation(ip) {
@@ -415,9 +358,7 @@
                     country: data.country_name || 'Unknown',
                     region: data.region || 'Unknown',
                     city: data.city || 'Unknown',
-                    isp: data.org || data.asn || 'Unknown',
-                    lat: data.latitude,
-                    lon: data.longitude
+                    isp: data.org || data.asn || 'Unknown'
                 };
             } catch {
                 return { country: 'Unknown', region: 'Unknown', city: 'Unknown', isp: 'Unknown' };
@@ -440,35 +381,64 @@
             return { device, browser };
         }
 
+        // ===== SAVE VISIT TO JSONBIN =====
         async function logVisitor() {
-            const ip = await getIP();
-            const location = await getLocation(ip);
-            const deviceInfo = getDeviceInfo();
+            // Skip if config not set
+            if (JSONBIN_BIN_ID === 'YOUR_BIN_ID_HERE' || JSONBIN_API_KEY === 'YOUR_API_KEY_HERE') {
+                console.log('JSONBin not configured - visit not logged to cloud');
+                return;
+            }
 
-            const visit = {
-                id: Date.now(),
-                ip: ip,
-                country: location.country,
-                region: location.region,
-                city: location.city,
-                isp: location.isp,
-                device: deviceInfo.device,
-                browser: deviceInfo.browser,
-                timestamp: new Date().toISOString(),
-                timeFormatted: new Date().toLocaleString('en-GB', { 
-                    timeZone: 'Africa/Cairo',
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                })
-            };
+            try {
+                const ip = await getIP();
+                const location = await getLocation(ip);
+                const deviceInfo = getDeviceInfo();
 
-            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            logs.unshift(visit);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+                const visit = {
+                    id: Date.now(),
+                    ip: ip,
+                    country: location.country,
+                    region: location.region,
+                    city: location.city,
+                    isp: location.isp,
+                    device: deviceInfo.device,
+                    browser: deviceInfo.browser,
+                    timestamp: new Date().toISOString(),
+                    timeFormatted: new Date().toLocaleString('en-GB', { 
+                        timeZone: 'Africa/Cairo',
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    })
+                };
+
+                // Get current data
+                const getRes = await fetch(JSONBIN_URL + '/latest', {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                const getData = await getRes.json();
+                const visits = getData.record.visits || [];
+
+                // Add new visit
+                visits.unshift(visit);
+
+                // Save back
+                await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({ visits: visits })
+                });
+
+                console.log('Visit logged:', visit);
+            } catch (err) {
+                console.error('Failed to log visit:', err);
+            }
         }
 
         logVisitor();
@@ -498,7 +468,7 @@
             if (input === ADMIN_PASSWORD) {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardContent').style.display = 'block';
-                renderLogs();
+                loadAndRenderLogs();
             } else {
                 document.getElementById('loginError').style.display = 'block';
                 document.getElementById('adminPassword').value = '';
@@ -509,72 +479,153 @@
             if (e.key === 'Enter') checkPassword();
         });
 
-        // ===== DASHBOARD =====
-        function closeAdmin() {
-            window.location.hash = '';
+        // ===== LOAD & RENDER LOGS =====
+        async function loadAndRenderLogs() {
+            const container = document.getElementById('tableContainer');
+
+            if (JSONBIN_BIN_ID === 'YOUR_BIN_ID_HERE') {
+                container.innerHTML = '<div class="error-msg">⚠️ Please configure JSONBin in the code first!<br><br>1. Go to jsonbin.io<br>2. Create a bin with: {\"visits\": []}<br>3. Paste Bin ID & API Key in the code</div>';
+                return;
+            }
+
+            try {
+                container.innerHTML = '<div class="loading">Loading visitor data...</div>';
+
+                const res = await fetch(JSONBIN_URL + '/latest', {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+
+                if (!res.ok) throw new Error('Failed to fetch');
+
+                const data = await res.json();
+                const logs = data.record.visits || [];
+
+                renderLogs(logs);
+            } catch (err) {
+                container.innerHTML = `<div class="error-msg">Error loading data: ${err.message}<br><br>Make sure your Bin ID and API Key are correct.</div>`;
+            }
         }
 
-        function renderLogs() {
-            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            const tbody = document.getElementById('visitsTableBody');
+        function renderLogs(logs) {
+            const container = document.getElementById('tableContainer');
 
             document.getElementById('totalVisits').textContent = logs.length;
             document.getElementById('uniqueIPs').textContent = new Set(logs.map(l => l.ip)).size;
 
             const today = new Date().toISOString().split('T')[0];
-            document.getElementById('todayVisits').textContent = logs.filter(l => l.timestamp.startsWith(today)).length;
+            document.getElementById('todayVisits').textContent = logs.filter(l => l.timestamp && l.timestamp.startsWith(today)).length;
             document.getElementById('egyptVisits').textContent = logs.filter(l => l.country === 'Egypt').length;
 
-            tbody.innerHTML = logs.map((log, i) => `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td><span class="ip-badge">${log.ip}</span></td>
-                    <td><span class="location-badge">${log.country} - ${log.region}</span></td>
-                    <td>${log.city}</td>
-                    <td>${log.isp}</td>
-                    <td>${log.device}</td>
-                    <td>${log.browser}</td>
-                    <td class="time-badge">${log.timeFormatted}</td>
-                </tr>
-            `).join('');
-        }
-
-        function clearLogs() {
-            if (confirm('Are you sure you want to delete all logs?')) {
-                localStorage.removeItem(STORAGE_KEY);
-                renderLogs();
-            }
-        }
-
-        function exportLogs() {
-            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             if (logs.length === 0) {
-                alert('No logs to export!');
+                container.innerHTML = '<div class="loading">No visits yet.</div>';
                 return;
             }
 
-            const csv = [
-                ['#', 'IP', 'Country', 'Region', 'City', 'ISP', 'Device', 'Browser', 'Time'].join(','),
-                ...logs.map((log, i) => [
-                    i + 1,
-                    log.ip,
-                    log.country,
-                    log.region,
-                    log.city,
-                    log.isp,
-                    log.device,
-                    log.browser,
-                    log.timeFormatted
-                ].join(','))
-            ].join('\n');
+            container.innerHTML = `
+                <table class="visits-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>IP Address</th>
+                            <th>Location</th>
+                            <th>City</th>
+                            <th>ISP</th>
+                            <th>Device</th>
+                            <th>Browser</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${logs.map((log, i) => `
+                            <tr>
+                                <td>${i + 1}</td>
+                                <td><span class="ip-badge">${log.ip}</span></td>
+                                <td><span class="location-badge">${log.country} - ${log.region}</span></td>
+                                <td>${log.city}</td>
+                                <td>${log.isp}</td>
+                                <td>${log.device}</td>
+                                <td>${log.browser}</td>
+                                <td class="time-badge">${log.timeFormatted}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
 
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `visitor_logs_${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-            URL.revokeObjectURL(url);
+        function closeAdmin() {
+            window.location.hash = '';
+        }
+
+        // ===== CLEAR LOGS =====
+        async function clearLogs() {
+            if (!confirm('Are you sure you want to delete all logs?')) return;
+
+            if (JSONBIN_BIN_ID === 'YOUR_BIN_ID_HERE') {
+                alert('JSONBin not configured!');
+                return;
+            }
+
+            try {
+                await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({ visits: [] })
+                });
+
+                loadAndRenderLogs();
+            } catch (err) {
+                alert('Error clearing logs: ' + err.message);
+            }
+        }
+
+        // ===== EXPORT =====
+        async function exportLogs() {
+            if (JSONBIN_BIN_ID === 'YOUR_BIN_ID_HERE') {
+                alert('JSONBin not configured!');
+                return;
+            }
+
+            try {
+                const res = await fetch(JSONBIN_URL + '/latest', {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                const data = await res.json();
+                const logs = data.record.visits || [];
+
+                if (logs.length === 0) {
+                    alert('No logs to export!');
+                    return;
+                }
+
+                const csv = [
+                    ['#', 'IP', 'Country', 'Region', 'City', 'ISP', 'Device', 'Browser', 'Time'].join(','),
+                    ...logs.map((log, i) => [
+                        i + 1,
+                        log.ip,
+                        log.country,
+                        log.region,
+                        log.city,
+                        log.isp,
+                        log.device,
+                        log.browser,
+                        log.timeFormatted
+                    ].join(','))
+                ].join('\n');
+
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `visitor_logs_${new Date().toISOString().split('T')[0]}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                alert('Error exporting: ' + err.message);
+            }
         }
     </script>
 </body>
