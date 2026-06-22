@@ -63,7 +63,7 @@
             50% { transform: scale(1.05); }
         }
 
-        /* ===== HIDDEN ADMIN PANEL ===== */
+        /* ===== ADMIN PANEL ===== */
         .admin-panel {
             display: none;
             position: fixed;
@@ -81,6 +81,80 @@
 
         .admin-panel.active {
             display: block;
+        }
+
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-box {
+            background: #16213e;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #0f3460;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-box h2 {
+            color: #e94560;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .login-box p {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #0f3460;
+            background: #1a1a2e;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .login-box input:focus {
+            border-color: #e94560;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background: #e94560;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-box button:hover {
+            background: #ff6b81;
+            transform: translateY(-2px);
+        }
+
+        .login-error {
+            color: #e74c3c;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            display: none;
         }
 
         .admin-header {
@@ -221,8 +295,10 @@
             .visits-table { font-size: 0.75rem; }
             .visits-table th, .visits-table td { padding: 8px; }
             .admin-header h2 { font-size: 1.3rem; }
+            .login-box { padding: 30px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <!-- Background Hearts -->
@@ -233,57 +309,75 @@
         unfortunately I still love u
     </div>
 
-    <!-- ===== HIDDEN ADMIN PANEL ===== -->
-    <!-- Secret access: triple-click anywhere on the page, then type "nona2025" -->
+    <!-- ===== ADMIN PANEL ===== -->
     <div class="admin-panel" id="adminPanel">
-        <div class="admin-header">
-            <h2>🔒 Visitor Logs Dashboard</h2>
-            <button class="admin-close" onclick="closeAdmin()">Close</button>
-        </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3 id="totalVisits">0</h3>
-                <p>Total Visits</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="uniqueIPs">0</h3>
-                <p>Unique IPs</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="todayVisits">0</h3>
-                <p>Today's Visits</p>
-            </div>
-            <div class="stat-card">
-                <h3 id="egyptVisits">0</h3>
-                <p>From Egypt</p>
+        <!-- Login Screen -->
+        <div class="login-screen" id="loginScreen">
+            <div class="login-box">
+                <h2>🔒 Admin Access</h2>
+                <p>Enter password to view visitor logs</p>
+                <input type="password" id="adminPassword" placeholder="Enter password..." autocomplete="off">
+                <button onclick="checkPassword()">Login</button>
+                <div class="login-error" id="loginError">Wrong password!</div>
             </div>
         </div>
 
-        <div style="margin-bottom: 15px;">
-            <button class="clear-btn" onclick="clearLogs()">🗑️ Clear All Logs</button>
-            <button class="export-btn" onclick="exportLogs()">📥 Export CSV</button>
-        </div>
+        <!-- Dashboard -->
+        <div id="dashboardContent" style="display:none;">
+            <div class="admin-header">
+                <h2>🔒 Visitor Logs Dashboard</h2>
+                <button class="admin-close" onclick="closeAdmin()">Close</button>
+            </div>
 
-        <table class="visits-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>IP Address</th>
-                    <th>Location</th>
-                    <th>City</th>
-                    <th>ISP</th>
-                    <th>Device</th>
-                    <th>Browser</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody id="visitsTableBody">
-            </tbody>
-        </table>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalVisits">0</h3>
+                    <p>Total Visits</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="uniqueIPs">0</h3>
+                    <p>Unique IPs</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="todayVisits">0</h3>
+                    <p>Today\'s Visits</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="egyptVisits">0</h3>
+                    <p>From Egypt</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <button class="clear-btn" onclick="clearLogs()">🗑️ Clear All Logs</button>
+                <button class="export-btn" onclick="exportLogs()">📥 Export CSV</button>
+            </div>
+
+            <table class="visits-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>IP Address</th>
+                        <th>Location</th>
+                        <th>City</th>
+                        <th>ISP</th>
+                        <th>Device</th>
+                        <th>Browser</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="visitsTableBody">
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
+        // ===== CONFIG =====
+        const ADMIN_PASSWORD = 'nona2025';
+        const STORAGE_KEY = 'visitor_logs_nona';
+
         // ===== BACKGROUND HEARTS =====
         function createBackgroundHearts() {
             const container = document.getElementById('heartsBg');
@@ -302,10 +396,7 @@
         }
         createBackgroundHearts();
 
-        // ===== VISITOR TRACKING SYSTEM =====
-        const STORAGE_KEY = 'visitor_logs_nona';
-
-        // Get IP address
+        // ===== VISITOR TRACKING =====
         async function getIP() {
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
@@ -316,7 +407,6 @@
             }
         }
 
-        // Get location from IP
         async function getLocation(ip) {
             try {
                 const res = await fetch(`https://ipapi.co/${ip}/json/`);
@@ -334,11 +424,10 @@
             }
         }
 
-        // Get device info
         function getDeviceInfo() {
             const ua = navigator.userAgent;
             let device = 'Desktop';
-            if (/Mobile|Android|iPhone|iPad|iPod/.test(ua)) device = 'Mobile';
+            if (/Mobile|Android|iPhone|iPod/.test(ua)) device = 'Mobile';
             if (/Tablet|iPad/.test(ua)) device = 'Tablet';
 
             let browser = 'Unknown';
@@ -351,7 +440,6 @@
             return { device, browser };
         }
 
-        // Log visitor
         async function logVisitor() {
             const ip = await getIP();
             const location = await getLocation(ip);
@@ -378,58 +466,58 @@
                 })
             };
 
-            // Save to localStorage
             const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             logs.unshift(visit);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-
-            console.log('Visitor logged:', visit);
         }
 
-        // Run on page load
         logVisitor();
 
-        // ===== ADMIN PANEL =====
-        let clickCount = 0;
-        let clickTimer = null;
-        let secretInput = '';
-
-        // Triple-click detection
-        document.body.addEventListener('click', () => {
-            clickCount++;
-            if (clickCount === 3) {
-                document.addEventListener('keydown', secretKeyHandler);
-                clickCount = 0;
+        // ===== URL ROUTING =====
+        function handleRoute() {
+            const hash = window.location.hash;
+            if (hash === '#/admin') {
+                document.getElementById('adminPanel').classList.add('active');
+                document.getElementById('mainText').style.display = 'none';
+            } else {
+                document.getElementById('adminPanel').classList.remove('active');
+                document.getElementById('mainText').style.display = 'block';
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('dashboardContent').style.display = 'none';
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('loginError').style.display = 'none';
             }
-            clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+        }
+
+        window.addEventListener('hashchange', handleRoute);
+        handleRoute();
+
+        // ===== LOGIN =====
+        function checkPassword() {
+            const input = document.getElementById('adminPassword').value;
+            if (input === ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+                renderLogs();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+
+        document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
         });
 
-        function secretKeyHandler(e) {
-            secretInput += e.key.toLowerCase();
-            if (secretInput.length > 9) secretInput = secretInput.slice(-9);
-
-            if (secretInput.includes('nona2025')) {
-                document.removeEventListener('keydown', secretKeyHandler);
-                secretInput = '';
-                openAdmin();
-            }
-        }
-
-        function openAdmin() {
-            document.getElementById('adminPanel').classList.add('active');
-            renderLogs();
-        }
-
+        // ===== DASHBOARD =====
         function closeAdmin() {
-            document.getElementById('adminPanel').classList.remove('active');
+            window.location.hash = '';
         }
 
         function renderLogs() {
             const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             const tbody = document.getElementById('visitsTableBody');
 
-            // Update stats
             document.getElementById('totalVisits').textContent = logs.length;
             document.getElementById('uniqueIPs').textContent = new Set(logs.map(l => l.ip)).size;
 
@@ -437,7 +525,6 @@
             document.getElementById('todayVisits').textContent = logs.filter(l => l.timestamp.startsWith(today)).length;
             document.getElementById('egyptVisits').textContent = logs.filter(l => l.country === 'Egypt').length;
 
-            // Render table
             tbody.innerHTML = logs.map((log, i) => `
                 <tr>
                     <td>${i + 1}</td>
